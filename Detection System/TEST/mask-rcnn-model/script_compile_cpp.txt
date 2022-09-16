@@ -1,0 +1,1 @@
+g++ -g -I/home/parking/tensorflow_files/PARKING/rapidjson/include process_data.cpp -o process_data

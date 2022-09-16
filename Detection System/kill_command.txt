@@ -1,0 +1,1 @@
+kill $(ps aux | grep '[p]ython3 detector_box.py parking_image.png regions.p' | awk '{print $2}')
