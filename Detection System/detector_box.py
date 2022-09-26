@@ -83,7 +83,7 @@ def intersection_compute(parking_spaces, car_boxes):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('image_path', help="Image file")
+    #parser.add_argument('image_path', help="Image file")
     parser.add_argument('regions_path', help="Regions file", default="regions.p")
     args = parser.parse_args()
     
@@ -91,13 +91,13 @@ if __name__ == "__main__":
     with open(regions, 'rb') as f:
         parking_spaces = pickle.load(f)
 
-    IMAGE_SOURCE = args.image_path
+    #IMAGE_SOURCE = args.image_path
     alpha = 0.6
-    #cap=cv2.VideoCapture(0)#READ FROM CAMERA
-    #ret,frame = cap.read()
+    cap=cv2.VideoCapture(0)#READ FROM CAMERA
+    ret,frame = cap.read()
     try:
         while True:
-            frame=cv2.imread(IMAGE_SOURCE)
+            #frame=cv2.imread(IMAGE_SOURCE)
             global overlay
             #overlay=frame.copy()
             rgb_image = frame[:, :, ::-1]
