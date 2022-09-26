@@ -48,7 +48,7 @@ if not os.path.exists(COCO_MODEL_PATH):
 model = MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=Config())
 model.load_weights(COCO_MODEL_PATH, by_name=True)
 
-def get_cars(boxes, class_ids):
+def filter_boxes(boxes, class_ids):
     global overlay
     cars = []
     for i, box in enumerate(boxes):
@@ -66,20 +66,19 @@ def get_cars(boxes, class_ids):
             cars.append([p1,p2,p3,p4])
     return np.array(cars)
 
-def compute_overlaps(parked_car_boxes, car_boxes):    
-    overlaps = np.zeros((len(parked_car_boxes), len(car_boxes)))
-    for i in range(len(parked_car_boxes)):
+def intersection_compute(parking_spaces, car_boxes):    
+    for i in range(len(parking_spaces)):
+        free_space=True
         for j in range(len(car_boxes)):
-            pol1_xy = parked_car_boxes[i]
-            pol2_xy = car_boxes[j]
-            polygon1_shape = shapely_poly(pol1_xy)
-            polygon2_shape = shapely_poly(pol2_xy)
-
-            polygon_intersection = polygon1_shape.intersection(polygon2_shape).area
-            polygon_union = polygon1_shape.union(polygon2_shape).area
-            IOU = polygon_intersection / polygon_union
-            overlaps[i][j] = IOU
-    return overlaps
+            polyspace = parking_spaces[i]
+            polycar = car_boxes[j]
+            polygonspace = shapely_poly(polyspace)
+            polygoncar = shapely_poly(polycar)
+            poly_inter = polygonspace.intersection(polygoncar).area
+            poly_uni = polygonspace.union(polygoncar).area
+            IOU = poly_inter / poly_uni
+            if(IOU>=0.15): free_space=False
+        free.append(free_space)
 
 
 if __name__ == "__main__":
@@ -90,7 +89,7 @@ if __name__ == "__main__":
     
     regions = args.regions_path
     with open(regions, 'rb') as f:
-        parked_car_boxes = pickle.load(f)
+        parking_spaces = pickle.load(f)
 
     IMAGE_SOURCE = args.image_path
     alpha = 0.6
@@ -106,17 +105,10 @@ if __name__ == "__main__":
             results = model.detect([rgb_image], verbose=0)
             #end=time.time()
             #print("Time in computation: "+str(end-start))
-            cars = get_cars(results[0]['rois'], results[0]['class_ids'])
-            overlaps = compute_overlaps(parked_car_boxes, cars)
+            cars = filter_boxes(results[0]['rois'], results[0]['class_ids'])
+            global free
             free=[PARKING_ID]
-            for i in range(len(parked_car_boxes)):
-                if len(overlaps[i])==0 or np.max(overlaps[i]) < 0.15:
-                    #cv2.fillPoly(overlay, [np.array(parked_car_boxes[i])], (71, 27, 92))
-                    free_space = True #space number i is free
-                    free.append(True)
-                else:
-                    free_space = False #space number i is not free
-                    free.append(False)
+            intersection_compute(parking_spaces, cars)
             #now we want to put this to our database
             jsonData = json.dumps(free)
             #import pdb; pdb.set_trace()
