@@ -94,7 +94,7 @@ $conn->close();
             container: 'map', // container ID
             // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
             style: 'mapbox://styles/mapbox/satellite-v9', // style URL
-            center: [22.948549, 40.646913], // starting position [lng, lat]
+            center: [22.9510848,40.652398], // starting position [lng, lat]
             zoom: 19 // starting zoom
         });
         map.on('load', () => {
