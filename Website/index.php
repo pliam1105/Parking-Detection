@@ -1,13 +1,8 @@
 <?php
-//Program to write moisture sensor measurements with esp32 via php
-
 $servername = "localhost";
 
-// REPLACE with your Database name
 $dbname = "id19492879_pliamdb";
-// REPLACE with Database user
 $username = "id19492879_pliam";
-// REPLACE with Database user password
 $password = "Pli@m12112005";
 
 // Create connection
@@ -92,7 +87,6 @@ $conn->close();
         mapboxgl.accessToken = 'pk.eyJ1IjoicGxpYW1wYXMiLCJhIjoiY2psbWRiczM5MTNneTNwbmprN2FoaG5jNSJ9.wNg62r6BQDH0TCEGwdPJJw';
         const map = new mapboxgl.Map({
             container: 'map', // container ID
-            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
             style: 'mapbox://styles/mapbox/satellite-v9', // style URL
             center: [22.9510848,40.652398], // starting position [lng, lat]
             zoom: 19 // starting zoom
