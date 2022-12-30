@@ -11,6 +11,18 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$result_last_update = $conn->query("select max(datetime) as datetime from parking_spaces");
+$row_upd = $result_last_update->fetch_assoc();
+$last_update = strtotime($row_upd['datetime']);
+$cur_time = strtotime(gmdate("Y-m-d H:i:s"));
+$dif_upd = intval(($cur_time-$last_update)/60);//in minutes
+if($dif_upd <= 15){
+    $color = "green";
+    $time_text = "Last updated ".$dif_upd." min ago";
+}else{
+    $color = "red";
+    $time_text = "Not updated in the last 15 minutes </br> Please refresh shortly";
+}
 $result_ids = $conn->query("select * from parking_ids");
 $info_ids = array();
 $park_data = array();
@@ -62,6 +74,7 @@ $conn->close();
             top: 0;
             bottom: 0;
             width: 100%;
+            height: auto;
         }
 
         .mapboxgl-popup-content {
@@ -76,6 +89,20 @@ $conn->close();
             border-radius: 50%;
             cursor: pointer;
         }
+
+        .last_updated {
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            right: 0;
+            top: 0;
+            padding-right: 8px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 8px;
+            color: white;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -83,6 +110,7 @@ $conn->close();
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.js"></script>
     <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.2.2/mapbox-gl-draw.css" type="text/css">
     <div id="map"></div>
+    <?php echo "<div class='last_updated' style='background-color: ".$color."'>".$time_text."</div>" ?>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoicGxpYW1wYXMiLCJhIjoiY2psbWRiczM5MTNneTNwbmprN2FoaG5jNSJ9.wNg62r6BQDH0TCEGwdPJJw';
         const map = new mapboxgl.Map({
