@@ -1,7 +1,7 @@
 # Parking Detection
 ## Overview
 A system that can be used to automatically detect the available parking spaces in a local parking lot.<br>
-This system is currently in use by the municipality I live in, installed in a local parking space: [Municipality Website](https://www.dimosneapolis-sykeon.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%B5%CF%81%CF%89%CF%83%CE%B7/%CE%BD%CE%B5%CE%B1/3001/%CF%80%CE%B9%CE%BB%CE%BF%CF%84%CE%B9%CE%BA%CE%B7-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%B7-%CE%B4%CF%89%CF%81%CE%B5%CE%B1%CE%BD-%CF%80%CE%B1%CF%81%CE%B1%CE%BA%CE%BF%CE%BB%CE%BF%CF%85%CE%B8%CE%B7%CF%83%CE%B7-%CE%B5%CE%BB%CE%B5%CF%85%CE%B8%CE%B5%CF%81%CF%89%CE%BD-%CE%B8%CE%B5%CF%83%CE%B5%CF%89%CE%BD-%CF%83%CF%84%CE%B1%CE%B8%CE%BC%CE%B5%CF%85%CF%83%CE%B7%CF%82-free-parking-app), [System Website](http://pliamprojects.000webhostapp.com/parking/)
+This system is currently in use by the municipality I live in, installed in a local parking lot: [Municipality Website](https://www.dimosneapolis-sykeon.gr/%CE%B5%CE%BD%CE%B7%CE%BC%CE%B5%CF%81%CF%89%CF%83%CE%B7/%CE%BD%CE%B5%CE%B1/3001/%CF%80%CE%B9%CE%BB%CE%BF%CF%84%CE%B9%CE%BA%CE%B7-%CE%B5%CF%86%CE%B1%CF%81%CE%BC%CE%BF%CE%B3%CE%B7-%CE%B4%CF%89%CF%81%CE%B5%CE%B1%CE%BD-%CF%80%CE%B1%CF%81%CE%B1%CE%BA%CE%BF%CE%BB%CE%BF%CF%85%CE%B8%CE%B7%CF%83%CE%B7-%CE%B5%CE%BB%CE%B5%CF%85%CE%B8%CE%B5%CF%81%CF%89%CE%BD-%CE%B8%CE%B5%CF%83%CE%B5%CF%89%CE%BD-%CF%83%CF%84%CE%B1%CE%B8%CE%BC%CE%B5%CF%85%CF%83%CE%B7%CF%82-free-parking-app), [System Website](http://pliamprojects.000webhostapp.com/parking/)
 
 <p align="center"><img src="Images/website.png" width="70%"></p>
 
