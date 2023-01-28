@@ -30,6 +30,18 @@ After that, the detection script checks each parking space with each car and fin
 </div>
 <br>
 
+## Automations
+
+I have added a text (on the top right) on the website that informs the citizens about the last time the data were updated.
+
+<p align="left"><img src="Images/last_upd.png" width="30%"></p>
+
+I have also made a php script that runs every 10 minutes and sends an email to me and the municipality IT Manager if the system has not sent data in the last 10 minutes, so that I access it remotely and restart it.
+
+[Script code](Website/upd_notif.php)
+
+The detection script is also being run at startup (with `crontab`), as well as in a loop (using a `watch` command), so that when it stops it is run again automatically.
+
 ## Database
 
 The availability data are then encoded to JSON and sent to an online database via some [PHP files](Website/upload_data.php).
